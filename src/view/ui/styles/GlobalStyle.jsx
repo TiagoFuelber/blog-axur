@@ -22,10 +22,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 800;
   }
 
-  /* .red {
-    color: ${COLORS.LightRed};
-  } */
-
   a {
     color: ${COLORS.LIGHT_BLUE};
   }

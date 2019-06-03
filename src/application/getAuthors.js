@@ -1,13 +1,13 @@
 import { Author } from '../domain/index';
 
 export default ({ repository }) =>
-  async () => {
+  async ({ onSuccess, onError }) => {
     try {
       const authors = await repository.getAuthors();
 
-      return authors.map(author =>
-        new Author(author));
+      onSuccess(authors.map(author =>
+        new Author(author)));
     } catch (err) {
-      throw new Error(err);
+      onError(err);
     }
   };

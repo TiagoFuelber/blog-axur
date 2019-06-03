@@ -1,16 +1,21 @@
-import { getPublications } from '../../container';
 import { PUBLICATIONS } from '../actionTypes';
 import { showLoader, hideLoader } from '../loader/actionCreators';
 
-export const getPublicationsAction = dispatch =>
-  async () => {
+export const getPublications = () =>
+  async (dispatch, getState, container) => {
     dispatch(showLoader());
-    const publications = await getPublications();
-
-    dispatch({ type: PUBLICATIONS.GET_PUBLICATIONS, publications });
-    dispatch(hideLoader());
+    container.getPublications({
+      onSuccess: (publications) => {
+        dispatch({ type: PUBLICATIONS.GET_PUBLICATIONS, publications });
+        dispatch(hideLoader());
+      },
+      onError: (err) => {
+        dispatch(hideLoader());
+        throw new Error(err);
+      }
+    });
   };
 
-export const changeOrderAction = dispatch =>
-  order =>
+export const changeOrder = order =>
+  dispatch =>
     dispatch({ type: PUBLICATIONS.CHANGE_ORDER, order });

@@ -8,7 +8,11 @@ import SelectInput from '../ui/select/SelectInput';
 import StyledPublicationsPageHeader from './StyledPublicationsPageHeader';
 import PublicationSummary from './PublicationSummary';
 import StyledPublicationsContainer from './StyledPublicationsContainer';
-import { getPublicationsAction, getAuthorsAction, changeOrderAction } from '../../state/index';
+import { 
+  getPublications as getPublicationsAction, 
+  getAuthors as getAuthorsAction, 
+  changeOrder as changeOrderAction 
+} from '../../state/index';
 import { Publication, Author } from '../../domain';
 
 const orderOptions = [
@@ -104,12 +108,11 @@ const mapStateToProps = ({ publicationListStore, authorStore }) => {
   });
 };
 
-const mapDispatchToProps = dispatch =>
-  ({
-    getPublications: getPublicationsAction(dispatch),
-    getAuthors: getAuthorsAction(dispatch),
-    changeOrder: changeOrderAction(dispatch)
-  });
+const mapDispatchToProps = {
+  getPublications: getPublicationsAction,
+  getAuthors: getAuthorsAction,
+  changeOrder: changeOrderAction
+};
 
 export default connect(
   mapStateToProps,

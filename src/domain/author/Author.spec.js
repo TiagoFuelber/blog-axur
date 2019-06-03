@@ -1,4 +1,4 @@
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import { Author } from './Author';
 
 describe('author domain', () => {
@@ -14,8 +14,12 @@ describe('author domain', () => {
       author = new Author(authorJson);
     });
 
-    it('should have all properties of Author', () => {
-      expect(author).to.be.eql(authorJson);
+    it("should be possible to get author's id", () => {
+      expect(author.id).to.be.eql(1);
+    });
+
+    it("should be possible to get author's name", () => {
+      expect(author.name).to.be.equal('Jemma Chadwick');
     });
 
     it('should be an instance of Author', () => {

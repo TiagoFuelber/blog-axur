@@ -5,7 +5,7 @@ import StyledBasePage from '../ui/styles/StyledBasePage';
 import Header from '../ui/header/Header';
 import Container from '../ui/Container';
 import { Publication } from '../../domain';
-import { getPublicationAction } from '../../state';
+import { getPublication as getPublicationAction } from '../../state';
 import { PUBLICATION } from '../../state/actionTypes';
 
 class PublicationPage extends Component {
@@ -53,17 +53,24 @@ PublicationPage.propTypes = {
   }).isRequired
 };
 
-const mapStateToProps = ({ publicationStore }) => {
+const mapStateToProps = ({ publicationStore, publicationListStore, authorStore }) => {
   const { publication, authorName } = publicationStore;
-  return { publication, authorName };
+  const { publications } = publicationListStore;
+  const { authors } = authorStore;
+  return {
+    publication,
+    authorName,
+    publications,
+    authors
+  };
 };
 
-const mapDispatchToProps = dispatch =>
-  ({
-    getPublication: getPublicationAction(dispatch),
-    clearPublication: () =>
+const mapDispatchToProps = {
+  getPublication: getPublicationAction,
+  clearPublication: () =>
+    dispatch =>
       dispatch({ type: PUBLICATION.CLEAR_PUBLICATION })
-  });
+};
 
 export default connect(
   mapStateToProps,

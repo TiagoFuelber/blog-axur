@@ -1,9 +1,6 @@
-import { Blue } from '../styles/constants';
-
 const getBaseButtonStyle = (width = 'auto') =>
   `
     color: white;
-    background-color: ${Blue};
     border: none;
     padding: 10px;
     font-size: 18px;
